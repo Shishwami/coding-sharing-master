@@ -8,12 +8,12 @@ export default async function handler(req, res) {
         const collection = db.collection(process.env.COLLECTION);
 
         let id = req.query.id;
-        const doc = await collection.findOne({_id:new ObjectId(id)});
+        const codeSnippet = await collection.findOne({_id:new ObjectId(id)});
         
-        if (!doc)
+        if (!codeSnippet)
             return res.status(404).json({ error: 'Document not found' });
 
-        return res.status(200).json(doc);
+        return res.status(200).json(codeSnippet);
 
     } catch (err) {
         console.error("API error:", err);

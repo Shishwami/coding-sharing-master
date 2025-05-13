@@ -1,0 +1,14 @@
+:root{
+  --light-mode: #FFFFFE;
+  --dark-mode: #121826;
+  --btn-disabled: #364153;
+  --btn-enabled: #406AFF;
+  --select-background-color: #CED6E1;
+
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

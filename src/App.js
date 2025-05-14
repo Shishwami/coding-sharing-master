@@ -5,13 +5,17 @@ import Editor from "@monaco-editor/react";
 import * as monaco from 'monaco-editor';
 
 import * as defaults from './scripts/defaults.js'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
 
   const [codeText, updateCodeText] = useState(defaults.code);
   const [language, setLanguage] = useState(defaults.language);
   const [theme, setTheme] = useState(defaults.theme);
+
+  useEffect(()=>{
+
+  },[]);
 
   const handleCodeChange = (value, e) => {
     updateCodeText(value);
@@ -29,8 +33,8 @@ function App() {
     localStorage.setItem('theme', newTheme);
   };
 
-  const languages = monaco.languages.getLanguages();
-  console.log(language);
+  // const languages = monaco.languages.getLanguages();
+  // console.log(language);
 
   return (
     <div id="App-container">
@@ -43,7 +47,7 @@ function App() {
         <div id='editor-container'>
           <div id='toolbar-container' style={{ height: '100px' }}>
             <Editor
-              language={defaults.language}
+              language={language}
               value={codeText}
               theme={theme}
               onChange={handleCodeChange}
@@ -57,7 +61,10 @@ function App() {
                 }))}
                 onChange={handleLanguageChange}
               />
-              <Selector options={[]}></Selector>
+              <Selector options={[]}
+              value={theme}
+              onChange={handleThemeChange}
+              ></Selector>
             </div>
             <form>
               <button type='button'>Link</button>

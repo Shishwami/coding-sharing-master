@@ -15,4 +15,5 @@
 
 #editor-container{
   background-color: var(--monaco-background);
+  position: relative;
 }

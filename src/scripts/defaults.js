@@ -1,5 +1,5 @@
 export const code = localStorage.getItem('code') || "//type something here;"
-export const language = localStorage.getItem('language') || 'javascript';
+export const language = localStorage.getItem('language') || 'html';
 
 
 export const themes = [

@@ -14,10 +14,26 @@ function App() {
   const [codeText, updateCodeText] = useState(defaults.code);
   const [language, setLanguage] = useState(defaults.language);
   const [theme, setTheme] = useState(defaults.theme);
+  const [linkText, setLinkText] = useState('');
+  const [link, setLink] = useState('');
+  const [linkVisible, setLinkVisible] = useState(true);
+  const [submitDisabed, setSubmitDisabled] = useState(true);
+  const [getCodeLoad,setGetCodeLoad] = useState(false);
 
   const monacoRef = useRef(null);
   const [languages, setLanguages] = useState([]);
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const idFromUrl = urlParams.get('id');
+
+    if (idFromUrl) {
+      console.log("loading code please wait")
+      handleLoadCoad(idFromUrl);
+    } else {
+      console.log('ID not found in URL');
+    }
+  }, []);
 
   const handleEditorMount = (editor, monaco) => {
     monacoRef.current = monaco;
@@ -32,6 +48,7 @@ function App() {
 
   const handleCodeChange = (value, e) => {
     updateCodeText(value);
+    setSubmitDisabled(false);
     localStorage.setItem('code', value);
   }
 
@@ -52,6 +69,66 @@ function App() {
     document.documentElement.style.setProperty('--monaco-background', selectedTheme.backgroundColor);
   }
 
+  const handleCopyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(link);
+      alert("Link copied to clipboard!");
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitDisabled(true);
+
+    const body = {
+      code: codeText,
+      language: language,
+    };
+
+    try {
+      const response = await fetch(`/api/submitSnippet`, {
+        method: "POST",
+        headers: {
+          "Content-Type": 'application/json',
+        },
+        body: JSON.stringify(body)
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        const snippetUrl = `${window.location.origin}/shared?id=${data.id}`;
+        setLinkText(`.../share?id=${data.id}`);
+        setLink(snippetUrl);
+        setLinkVisible(false);
+        window.history.pushState({}, '', `/shared?id=${data.id}`);
+      } else {
+        console.error("Error submitting snippet:", data.error);
+      }
+    } catch (err) {
+      console.error("Network error:", err);
+    }
+  };
+
+  const handleLoadCoad = async (id) => {
+    try {
+      const response = await fetch(`/api/shared?id=${id}`);
+      const data = await response.json();
+
+      if(response.ok){
+        updateCodeText(data.code);
+        setLanguage(data.language);
+      }else{
+        console.error(data.error);
+      }
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
   return (
     <div id="App-container">
       <div id='App'>
@@ -61,6 +138,7 @@ function App() {
           <h2>Your Code easily</h2>
         </div>
         <div id='editor-container' style={{ height: '100px' }}>
+          
           <Editor
             key={theme}
             language={language}
@@ -70,10 +148,8 @@ function App() {
             onMount={handleEditorMount}
             height={'60%'}
             width={'90%'}
-
           />
           <div id='toolbar-container'>
-
             <div>
               <Selector
                 value={language}
@@ -88,9 +164,19 @@ function App() {
                 onChange={handleThemeChange}
               ></Selector>
             </div>
-            <form>
-              <button type='button'>Link</button>
-              <button type='submit'>Submit</button>
+            <form onSubmit={handleSubmit}>
+
+              {!linkVisible && (<button
+                type='button'
+                onClick={handleCopyToClipboard}
+                disabled={linkVisible}>
+                {linkText}
+              </button>)}
+
+              <button
+                type='submit'
+                disabled={submitDisabed}
+              >Submit</button>
             </form>
           </div>
         </div>

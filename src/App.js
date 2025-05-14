@@ -18,7 +18,6 @@ function App() {
   const [link, setLink] = useState('');
   const [linkVisible, setLinkVisible] = useState(true);
   const [submitDisabed, setSubmitDisabled] = useState(true);
-  const [getCodeLoad,setGetCodeLoad] = useState(false);
 
   const monacoRef = useRef(null);
   const [languages, setLanguages] = useState([]);

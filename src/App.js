@@ -1,11 +1,13 @@
 import './App.css';
 import Selector from './components/CustomSelector.js';
 
+import { registerCustomThemes } from './scripts/themeParser.js';
+
 import Editor from "@monaco-editor/react";
 import * as monaco from 'monaco-editor';
 
 import * as defaults from './scripts/defaults.js'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function App() {
 
@@ -13,9 +15,20 @@ function App() {
   const [language, setLanguage] = useState(defaults.language);
   const [theme, setTheme] = useState(defaults.theme);
 
-  useEffect(()=>{
+  const monacoRef = useRef(null);
+  const [languages, setLanguages] = useState([]);
 
-  },[]);
+
+  const handleEditorMount = (editor, monaco) => {
+    monacoRef.current = monaco;
+    registerCustomThemes(monaco, defaults.themes);
+    monaco.editor.setTheme(theme);
+
+    const availableLanguages = monaco.languages.getLanguages();
+    setLanguages(availableLanguages);
+
+    tooblarThemeChange()
+  };
 
   const handleCodeChange = (value, e) => {
     updateCodeText(value);
@@ -30,11 +43,14 @@ function App() {
   const handleThemeChange = (e) => {
     const newTheme = e.target.value;
     setTheme(newTheme);
+    monaco.editor.setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
   };
 
-  // const languages = monaco.languages.getLanguages();
-  // console.log(language);
+  const tooblarThemeChange = () => {
+    const selectedTheme = defaults.themes.find(themes => themes.id === theme);
+    document.documentElement.style.setProperty('--monaco-background', selectedTheme.backgroundColor);
+  }
 
   return (
     <div id="App-container">
@@ -44,26 +60,32 @@ function App() {
           <h3>Create & Share</h3>
           <h2>Your Code easily</h2>
         </div>
-        <div id='editor-container'>
-          <div id='toolbar-container' style={{ height: '100px' }}>
-            <Editor
-              language={language}
-              value={codeText}
-              theme={theme}
-              onChange={handleCodeChange}
-            />
+        <div id='editor-container' style={{ height: '100px' }}>
+          <Editor
+            key={theme}
+            language={language}
+            value={codeText}
+            theme={theme}
+            onChange={handleCodeChange}
+            onMount={handleEditorMount}
+            height={'60%'}
+            width={'90%'}
+
+          />
+          <div id='toolbar-container'>
+
             <div>
               <Selector
                 value={language}
-                options={monaco.languages.getLanguages().map(lang => ({
+                options={languages.map(lang => ({
                   id: lang.id,
                   aliases: lang.aliases || [lang.id]
                 }))}
                 onChange={handleLanguageChange}
               />
-              <Selector options={[]}
-              value={theme}
-              onChange={handleThemeChange}
+              <Selector options={defaults.themes}
+                value={theme}
+                onChange={handleThemeChange}
               ></Selector>
             </div>
             <form>

@@ -115,10 +115,10 @@ function App() {
       const response = await fetch(`/api/shared?id=${id}`);
       const data = await response.json();
 
-      if(response.ok){
+      if (response.ok) {
         updateCodeText(data.code);
         setLanguage(data.language);
-      }else{
+      } else {
         console.error(data.error);
       }
 
@@ -136,18 +136,18 @@ function App() {
           <h3>Create & Share</h3>
           <h2>Your Code easily</h2>
         </div>
-        <div id='editor-container' style={{ height: '100px' }}>
-          
-          <Editor
-            key={theme}
-            language={language}
-            value={codeText}
-            theme={theme}
-            onChange={handleCodeChange}
-            onMount={handleEditorMount}
-            height={'60%'}
-            width={'90%'}
-          />
+        <div id='editor-container'>
+          <div id='editor-wrapper'>
+            <Editor
+              key={theme}
+              language={language}
+              value={codeText}
+              theme={theme}
+              onChange={handleCodeChange}
+              onMount={handleEditorMount}
+            />
+          </div>
+
           <div id='toolbar-container'>
             <div>
               <Selector
@@ -178,6 +178,11 @@ function App() {
               >Submit</button>
             </form>
           </div>
+        </div>
+        <div className="author-info">
+          Coded by <a href="#">Eugene Peralta</a> | Challenge by
+          <a href="https://www.devchallenges.io?ref=challenge" target="_blank"
+          >devChallenges.io</a>.
         </div>
       </div>
     </div>

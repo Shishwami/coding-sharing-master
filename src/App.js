@@ -98,7 +98,7 @@ function App() {
       const data = await response.json();
       if (response.ok) {
         const snippetUrl = `${window.location.origin}/shared?id=${data.id}`;
-        setLinkText(`.../share?id=${data.id}`);
+        setLinkText(`../${data.id}`);
         setLink(snippetUrl);
         setLinkVisible(false);
         window.history.pushState({}, '', `/shared?id=${data.id}`);

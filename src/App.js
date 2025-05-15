@@ -14,9 +14,9 @@ function App() {
   const [codeText, updateCodeText] = useState(defaults.code);
   const [language, setLanguage] = useState(defaults.language);
   const [theme, setTheme] = useState(defaults.theme);
-  const [linkText, setLinkText] = useState('');
+  const [linkText, setLinkText] = useState('8957678677698');
   const [link, setLink] = useState('');
-  const [linkVisible, setLinkVisible] = useState(true);
+  const [linkVisible, setLinkVisible] = useState(false);
   const [submitDisabed, setSubmitDisabled] = useState(true);
 
   const monacoRef = useRef(null);
@@ -169,13 +169,13 @@ function App() {
                 type='button'
                 onClick={handleCopyToClipboard}
                 disabled={linkVisible}>
-                {linkText}
+                <i></i>{linkText}
               </button>)}
 
               <button
                 type='submit'
                 disabled={submitDisabed}
-              >Submit</button>
+              ><i></i>Submit</button>
             </form>
           </div>
         </div>

@@ -4,7 +4,6 @@
   --btn-disabled: #364153;
   --btn-enabled: #406AFF;
   --select-background-color: #CED6E1;
-
 }
 
 * {
@@ -12,15 +11,20 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Outfit', sans-serif;
-
 }
 
 * {
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
+
 }
 
 #App-container {
-  background-image: linear-gradient(to bottom right, rgba(183, 135, 245, 1), rgba(116, 62, 228, 1));
+  background-image:
+    url('./resources/Hero-Background-notecode@2x.png'),
+    linear-gradient(to bottom right, rgba(183, 135, 245, 0.8), rgba(116, 62, 228, 0.8));
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 #App {
@@ -34,7 +38,6 @@
 
 #header {
   text-align: center;
-  grid-column: 1/-1;
 }
 
 #header>* {
@@ -50,18 +53,14 @@
 }
 
 #editor-container {
-  grid-column: 2/12;
-
   background-color: var(--monaco-background);
-
   padding: 10px;
   border-radius: 10px;
-
   height: 600px;
-
+  width: 70%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-
 }
 
 #editor-wrapper {
@@ -73,43 +72,79 @@
   justify-content: space-between;
 }
 
+#toolbar-container div,
+#toolbar-container form {
+  display: flex;
+  align-items: end;
+}
+
 #toolbar-container select {
-  background-color: var(--select-background-color);
-  width: 100px;
-  padding: 5px 15px;
+  width: 90px;
+  height: 30px;
+  padding: 5px;
   border-radius: 20px;
-  margin: auto 5px;
-  appearance: none;
+  margin: 5px;
+  background-color: var(--select-background-color);
+  border: none;
+}
 
-  background-image: url('./resources/down\ arrow.svg');
+#toolbar-container button {
+
+  all: unset;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  padding: 5px;
+  border-radius: 20px;
+  margin: 5px;
+  color: #406AFF;
+}
+
+#toolbar-container button[type='button'] i {
+  width: 20px;
+  height: 20px;
+  background-image: url('./resources/Share.svg');
   background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px 12px;
-
-  align-self: baseline;
+  background-size: contain;
+  display: inline-block;
+  margin: 0 5px;
+  filter: invert(68%) sepia(73%) saturate(583%) hue-rotate(175deg) brightness(101%) contrast(91%);
 
 }
 
-#toolbar-container button[type="submit"] {
-  background-color: var(--btn-enabled);
-  color: var(--light-mode);
-  width: 100px;
-  font-size: 18px;
-  padding: 5px 20px;
-  border-radius: 20px;
-  text-indent: 10px;
-  margin: 5px 5px;
-  appearance: none;
+.share-button {
+  color: aqua;
+  /* This will color the SVG stroke */
+}
 
+
+#toolbar-container button[type='submit'] {
+  padding: 10px 20px;
+  border-radius: 25px;
+  background-color: var(--btn-enabled);
+  font-size: 18px;
+  color: white;
+}
+
+#toolbar-container button[type='submit']:disabled {
+  background-color: var(--btn-disabled);
+
+}
+
+#toolbar-container button[type="submit"] i {
+  width: 20px;
+  height: 20px;
   background-image: url('./resources/Share.svg');
   background-repeat: no-repeat;
-  background-position: left 10px center;
-  background-size: 16px 16px;
+  background-size: contain;
+  display: inline-block;
+  margin: 0 5px;
 }
 
 .author-info {
-  grid-column: 1/-1;
-
+  grid-column: 1 / -1;
   font-size: 14px;
   text-align: center;
   margin-top: 16px;

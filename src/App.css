@@ -79,7 +79,7 @@
 }
 
 #toolbar-container select {
-  width: 90px;
+  width: 5rem;
   height: 30px;
   padding: 5px;
   border-radius: 20px;
@@ -153,4 +153,60 @@
 
 .author-info a {
   text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+  #editor-container {
+    width: 80%;
+
+  }
+
+  #toolbar-container button,
+  #toolbar-container select {
+    transform: scale(0.9);
+    margin: 0;
+  }
+
+
+}
+
+@media (max-width: 800px) {
+  #editor-container {
+    width: 90%;
+
+  }
+
+  #toolbar-container button,
+  #toolbar-container select {
+    transform: scale(0.8);
+  }
+
+  #toolbar-container{
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #toolbar-container form{
+    padding: 5px 0;
+    margin-left: auto;
+  }
+
+
+
+}
+
+@media (max-width:640px) {
+  #App {
+    margin: 0px;
+  }
+
+  #editor-container {
+    width: 95%;
+    margin: 0px auto;
+  }
+
+  #toolbar-container button,
+  #toolbar-container select {
+    transform: scale(0.7);
+  }
 }

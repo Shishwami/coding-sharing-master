@@ -9,6 +9,10 @@ import * as monaco from 'monaco-editor';
 import * as defaults from './scripts/defaults.js'
 import { useEffect, useRef, useState } from 'react';
 
+import './resources/simply-toasty/css/overlay.css'
+import './resources/simply-toasty/css/toast.css'
+import simplyToasty from './resources/simply-toasty/simplyToasty.js'
+
 function App() {
 
   const [codeText, updateCodeText] = useState(defaults.code);
@@ -18,20 +22,27 @@ function App() {
   const [link, setLink] = useState('');
   const [linkVisible, setLinkVisible] = useState(true);
   const [submitDisabed, setSubmitDisabled] = useState(true);
-
-  const monacoRef = useRef(null);
   const [languages, setLanguages] = useState([]);
 
+  const monacoRef = useRef(null);
+  const hasRun = useRef(false);
+
+
+  const toasty = new simplyToasty();
+  toasty.setPosition(toasty.positions.bottomRight);
+
   useEffect(() => {
+
+    if (hasRun.current) return;
+    hasRun.current = true;
+
     const urlParams = new URLSearchParams(window.location.search);
     const idFromUrl = urlParams.get('id');
 
     if (idFromUrl) {
-      console.log("loading code please wait")
       handleLoadCoad(idFromUrl);
-    } else {
-      console.log('ID not found in URL');
     }
+
   }, []);
 
   const handleEditorMount = (editor, monaco) => {
@@ -71,9 +82,12 @@ function App() {
   const handleCopyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(link);
-      alert("Link copied to clipboard!");
+      toasty.addMessage("Link copied to the clipboard", 'info', 3000);
+
     } catch (err) {
       console.error("Failed to copy: ", err);
+      toasty.addMessage("Link cannot be copied", 'error', 3000);
+
     }
   };
 
@@ -101,9 +115,13 @@ function App() {
         setLinkText(`../${data.id}`);
         setLink(snippetUrl);
         setLinkVisible(false);
-        window.history.pushState({}, '', `/shared?id=${data.id}`);
+        toasty.addMessage("Code Saved", 'success', 3000);
+        handleCopyToClipboard();
+
       } else {
-        console.error("Error submitting snippet:", data.error);
+        console.error(data.error);
+        toasty.addMessage("Error Submitting Code", 'success', 3000);
+
       }
     } catch (err) {
       console.error("Network error:", err);
@@ -112,14 +130,20 @@ function App() {
 
   const handleLoadCoad = async (id) => {
     try {
+      toasty.addMessage("Loading Code from Database", 'info', 3000);
+
       const response = await fetch(`/api/shared?id=${id}`);
       const data = await response.json();
 
       if (response.ok) {
         updateCodeText(data.code);
         setLanguage(data.language);
+        toasty.addMessage("Code Fetched Successfully", 'success', 3000);
+
       } else {
         console.error(data.error);
+        toasty.addMessage("Error Fetching Code", 'error', 3000);
+
       }
 
     } catch (err) {

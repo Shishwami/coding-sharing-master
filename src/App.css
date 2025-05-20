@@ -15,7 +15,6 @@
 
 * {
   /* outline: 1px solid red; */
-
 }
 
 #App-container {
@@ -179,16 +178,14 @@
   #toolbar-container button,
   #toolbar-container select {
     transform: scale(0.8);
+    margin: 5px auto;
   }
 
   #toolbar-container{
-    flex-direction: column;
     width: 100%;
   }
 
   #toolbar-container form{
-    padding: 5px 0;
-    margin-left: auto;
   }
 
 
@@ -208,5 +205,26 @@
   #toolbar-container button,
   #toolbar-container select {
     transform: scale(0.7);
+  }
+}
+
+@media (max-width:500px) {
+
+  #toolbar-container{
+    flex-direction: column;
+  }
+
+  #toolbar-container button,
+  #toolbar-container select {
+    transform: scale(0.8);
+  }
+
+  #toolbar-container form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column-reverse;
+    height: 100px;
   }
 }

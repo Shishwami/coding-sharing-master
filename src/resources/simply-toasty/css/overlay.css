@@ -1,0 +1,62 @@
+#simply_toasty_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    pointer-events: none;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.top-left {
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.top-center {
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.top-right {
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.center-left {
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.center-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.center-right {
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.bottom-left {
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.bottom-center {
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.bottom-right {
+    align-items: flex-end;
+    justify-content: flex-end;
+}

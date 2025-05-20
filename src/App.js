@@ -204,7 +204,7 @@ function App() {
           </div>
         </div>
         <div className="author-info">
-          Coded by <a href="#">Eugene Peralta</a> | Challenge by
+          Coded by <a href="https://github.com/Shishwami">Shishwami</a> | Challenge by
           <a href="https://www.devchallenges.io?ref=challenge" target="_blank"
           >devChallenges.io</a>.
         </div>

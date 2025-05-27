@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# Code Sharing App - NoteCode
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-brightgreen?style=for-the-badge&logo=vercel)]([https://your-demo-link.vercel.app](https://coding-sharing-master.vercel.app/))
 
-## Available Scripts
+This project is a solution to the **Code Sharing App** challenge from [DevChallenges](https://devchallenges.io/challenge/code-shraing-app-note-code). It’s a full-stack web application that enables users to create, save, and share code snippets easily.
 
-In the project directory, you can run:
+## 🚀 Project Overview
 
-### `npm start`
+- **Purpose:**  
+  Build a simple but functional code-sharing app where users can write code snippets, save them with a unique ID, and share them via a link.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Core Features:**  
+  - Load a default HTML snippet in the code editor on initial load.  
+  - Users can write or edit code snippets in multiple languages with selectable themes.  
+  - The **Share** button generates a unique ID, saves the snippet, and disables itself until the user edits the code again.  
+  - Snippets can be accessed and loaded via their unique URLs.  
+  - Responsive design to support all devices.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Technical Highlights:**  
+  - Frontend built with React, using a powerful code editor component (such as Monaco Editor).  
+  - Backend implemented as serverless API routes on Vercel.  
+  - MongoDB Atlas used for storing snippets and generating unique snippet IDs using MongoDB’s built-in ObjectIDs.  
+  - State management handled with React hooks (`useState`, `useEffect`).  
+  - Styling through CSS with responsiveness ensured via media queries.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ✨ Features
 
-### `npm run build`
+- Create and save code snippets with syntax highlighting  
+- Share snippets via unique URLs  
+- Responsive and user-friendly interface  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Technologies Used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Frontend: React.js  
+- Backend: Serverless API routes on Vercel  
+- Database: MongoDB Atlas  
+- Deployment: Vercel  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ⚙️ Getting Started
 
-### `npm run eject`
+### Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js (version X.X.X or later)  
+- npm or yarn  
+- MongoDB Atlas account and connection string  
+- Vercel CLI installed (`npm i -g vercel`)  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone the repository:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+       git clone https://github.com/Shishwami/coding-sharing-master.git
+       cd coding-sharing-master
 
-## Learn More
+2. Install dependencies:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+       npm install
+       # or
+       yarn install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. Create a `.env` file in the root directory and add your environment variables:
 
-### Code Splitting
+       MONGODB_URI=your-mongodb-atlas-connection-string
+       DB_NAME=codeSharing
+       COLLECTION=snippets
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+4. Run the development server with Vercel CLI:
 
-### Analyzing the Bundle Size
+       vercel dev
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-### Making a Progressive Web App
+## 📡 API Routes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This app uses serverless API routes on Vercel for backend logic, such as:
 
-### Advanced Configuration
+- `POST /api/snippets` — Save a new snippet  
+- `GET /api/snippets/:id` — Retrieve a snippet by ID  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🤝 Contributing
 
-### Deployment
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📄 License
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License.

@@ -1,6 +1,6 @@
 # Code Sharing App - NoteCode
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-brightgreen?style=for-the-badge&logo=vercel)]([https://your-demo-link.vercel.app](https://coding-sharing-master.vercel.app/))
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-brightgreen?style=for-the-badge&logo=vercel)](https://coding-sharing-master.vercel.app/)
 
 This project is a solution to the **Code Sharing App** challenge from [DevChallenges](https://devchallenges.io/challenge/code-shraing-app-note-code). It’s a full-stack web application that enables users to create, save, and share code snippets easily.
 
